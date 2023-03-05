@@ -12,11 +12,17 @@ async function fetchDataJSON() {
   return user
 }
 
-frontend.get('/', (_req, res) => {
+frontend.get('/', (req, res) => {
   fetchDataJSON().then((user) => {
     res.send(`Hi ${user.username}`)
   })
 })
+
+setInterval(() => {
+  fetchDataJSON().then((user) => {
+    console.log(user)
+  })
+}, 1000)
 
 backend.get('/', (req, res) => {
   res.json({ username: 'J.' })
